@@ -29,13 +29,25 @@
         }
 
         .button-container {
+            display: flex;
+            justify-content: space-between;
             margin-top: 20px;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
         }
 
         button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+        }
+
+        .rates {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
         }
     </style>
 </head>
@@ -57,22 +69,18 @@
         </tbody>
     </table>
 
-    <div>
-        <br>
-        <h3>Parking Rates:</h3>
-        <p>First hour or part thereof: RM2.00</p>
-        <p>Every subsequent hour or part thereof: RM1.00</p>
-        <p>Maximum per day: RM 10.00</p>
-    </div>
-
     <div class="button-container">
         <form action="index.html">
             <button type="submit">Back to Home</button>
         </form>
+        <button id="makePaymentButton">Make Payment</button>
     </div>
 
-    <div class="button-container">
-        <button id="makePaymentButton">Make Payment</button>
+    <div class="rates">
+        <h3>Parking Rates:</h3>
+        <p>First hour or part thereof: RM2.00</p>
+        <p>Every subsequent hour or part thereof: RM1.00</p>
+        <p>Maximum per day: RM 10.00</p>
     </div>
 
     <script>
@@ -80,7 +88,7 @@
             const params = new URLSearchParams(window.location.search);
             const numberplate = params.get('numberplate');
 
-            fetch(`https://sps-backend-c73f.onrender.com/get-info?numberplate=${numberplate}`)
+            fetch(`http://localhost:8080/get-info?numberplate=${numberplate}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -107,7 +115,7 @@
             document.getElementById('makePaymentButton').addEventListener('click', () => {
                 const confirmed = confirm('Are you sure you want to make payment?');
                 if (confirmed) {
-                    fetch(`https://sps-backend-c73f.onrender.com/update-payment`, {
+                    fetch(`http://localhost:8080/update-payment`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
