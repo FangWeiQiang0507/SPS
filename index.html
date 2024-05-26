@@ -1,17 +1,3 @@
-<!-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,21 +18,24 @@
       color: black;
       font-size: 20px;
       text-decoration: none;
-      margin: 20px 0;
-      padding: 10px; /* Add padding for a better hover effect */
-      transition: color 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
+      margin: 20px auto; 
+      padding: 20px; /* Add padding for better appearance */
+      border: 1px solid black; /* Smaller border width to indicate clickability */
+      border-radius: 5px; /* Rounded corners */
+      transition: color 0.3s, background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+      max-width: 200px; /* Set the maximum width for the block */
     }
     /* Hover effects for Ace Mall */
     a[href$="browse.html"]:hover {
-      color: rgb(41, 19, 190);
+      color: rgb(10, 40, 211);
       background-color: green; /* Specific background color for Ace Mall */
-      border-radius: 5px; /* Rounded corners */
+      border-color: green; /* Match border color to background color */
     }
     /* Hover effects for Excellence Center */
     a[href$="excellence-center.html"]:hover {
-      color: rgb(27, 19, 177);
+      color: rgb(10, 40, 211);
       background-color: red; /* Specific background color for Excellence Center */
-      border-radius: 5px; /* Rounded corners */
+      border-color: red; /* Match border color to background color */
     }
   </style>
 </head>
