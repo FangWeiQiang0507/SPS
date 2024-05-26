@@ -60,7 +60,7 @@
             const numberplate = document.getElementById('numberplate').value;
             const resultDiv = document.getElementById('result');
 
-            fetch(`http://localhost:8080/search?numberplate=${numberplate}`)
+            fetch(`https://sps-backend-c73f.onrender.com/search?numberplate=${numberplate}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
