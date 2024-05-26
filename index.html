@@ -1,0 +1,66 @@
+<!-- <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Parking System Portal</title>
+  <style>
+    body {
+      background-image: url('Palette.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    h1 {
+      text-align: center;
+      color: rgb(0, 0, 0); /* Ensure headings are visible on the background */
+    }
+    a {
+      display: block;
+      text-align: center;
+      color: black;
+      font-size: 20px;
+      text-decoration: none;
+      margin: 20px 0;
+      padding: 10px; /* Add padding for a better hover effect */
+      transition: color 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
+    }
+    /* Hover effects for Ace Mall */
+    a[href$="browse.html"]:hover {
+      color: rgb(41, 19, 190);
+      background-color: green; /* Specific background color for Ace Mall */
+      border-radius: 5px; /* Rounded corners */
+    }
+    /* Hover effects for Excellence Center */
+    a[href$="excellence-center.html"]:hover {
+      color: rgb(27, 19, 177);
+      background-color: red; /* Specific background color for Excellence Center */
+      border-radius: 5px; /* Rounded corners */
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Smart Parking System Portal!</h1>
+  <h1>Please choose your parking area!</h1>
+  <br>
+  <a href="#" onclick="navigateTo('browse.html')">Ace Mall</a>
+  <a href="#" onclick="navigateTo('excellence-center.html')">Excellence Center</a>
+  
+  <script>
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+  </script>
+</body>
+</html>

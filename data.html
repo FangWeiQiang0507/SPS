@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numberplate Information</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Numberplate Information</h1>
+    <table id="infoTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Numberplate</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <div>
+        <br>
+        <h3>Parking Rates:</h3>
+        <p>First hour or part thereof: RM2.00</p>
+        <p>Every subsequent hour or part thereof: RM1.00</p>
+        <p>Maximum per day: RM 10.00</p>
+    </div>
+
+    <div class="button-container">
+        <form action="index.html">
+            <button type="submit">Back to Home</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <button id="makePaymentButton">Make Payment</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const numberplate = params.get('numberplate');
+
+            fetch(`http://localhost:8080/get-info?numberplate=${numberplate}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const infoTableBody = document.querySelector('#infoTable tbody');
+                        const row = `
+                            <tr>
+                                <td>${data.data.id}</td>
+                                <td>${data.data.numberplate}</td>
+                                <td>${data.data.date}</td>
+                                <td>${data.data.time}</td>
+                                <td>${data.data.fee}</td>
+                            </tr>
+                        `;
+                        infoTableBody.innerHTML = row;
+                    } else {
+                        alert('No matching records found.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while retrieving data.');
+                });
+
+            document.getElementById('makePaymentButton').addEventListener('click', () => {
+                const confirmed = confirm('Are you sure you want to make payment?');
+                if (confirmed) {
+                    fetch(`http://localhost:8080/update-payment`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ numberplate })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = 'update_payment.html';
+                            } else {
+                                alert('Failed to update payment. Please try again.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred while updating payment.');
+                        });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

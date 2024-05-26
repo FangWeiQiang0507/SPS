@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numberplate Search</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        button {
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Please Search Your Number Plate of Vehicle for Making Payment</h2>
+
+    <form id="searchForm">
+        <label for="numberplate">Enter Numberplate:</label>
+        <input type="text" name="numberplate" id="numberplate" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="result"></div>
+
+    <div>
+        <br>
+        <h3>Parking Rates:</h3>
+        <p>First hour or part thereof: RM2.00</p>
+        <p>Every subsequent hour or part thereof: RM1.00</p>
+        <p>Maximum per day: RM 10.00</p>
+    </div>
+
+    <div class="button-container">
+        <form action="index.html">
+            <button type="submit">Back to Home</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const numberplate = document.getElementById('numberplate').value;
+            const resultDiv = document.getElementById('result');
+
+            fetch(`http://localhost:8080/search?numberplate=${numberplate}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = data.redirectUrl;
+                    } else {
+                        resultDiv.innerHTML = '<p>No matching records found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultDiv.innerHTML = '<p>An error occurred while searching. Please try again later.</p>';
+                });
+        });
+    </script>
+
+</body>
+</html>
