@@ -88,7 +88,7 @@
             const params = new URLSearchParams(window.location.search);
             const numberplate = params.get('numberplate');
 
-            fetch(`http://localhost:8080/get-info?numberplate=${numberplate}`)
+            fetch(`https://sps-backend-c73f.onrender.com/get-info?numberplate=${numberplate}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -115,7 +115,7 @@
             document.getElementById('makePaymentButton').addEventListener('click', () => {
                 const confirmed = confirm('Are you sure you want to make payment?');
                 if (confirmed) {
-                    fetch(`http://localhost:8080/update-payment`, {
+                    fetch(`https://sps-backend-c73f.onrender.com/update-payment`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
